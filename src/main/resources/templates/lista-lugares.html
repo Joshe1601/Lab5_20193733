@@ -1,10 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link th:href="@{/bootstrap.min.css}" rel="stylesheet" crossorigin="anonymous">
+    <title>Lugares</title>
 </head>
 <body>
+<header class="header">
+    <nav class="container">
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link" href="/viajes">Viajes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/mascotas">Mascotas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/lugares">Lugares</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div class="container">
+        <h1 class="pb-2 mb-4 border-bottom">Lista de Lugares</h1>
+        <a href="/viajes/nuevo" class="btn btn-warning">Nuevo lugar</a>
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>Nombre de lugar</th>
+                <th>Descripción de lugar</th>
+                <th>Fecha de visita</th>
+                <th>Imagen</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="lugar : ${listaLugares}" th:switch="${lugar.getIdLugares()}">
+                <td th:text="${lugar.getNombreLugar()}"></td>
+                <td th:text="${lugar.getDescripLugar()}"></td>
+                <td th:text="${lugar.getFechaLugar()}"></td>
+                <td th:case="1"><img th:src="@{/antankallo.jfif}" alt="antankallo"></td>
+                <td th:case="2"><img th:src="@{/lunahuana.jfif}" alt="lunahuana"></td>
+                <td th:case="3"><img th:src="@{/rajuntay.jfif}" alt="rajuntay"></td>
+                <td th:case="4"><img th:src="@{/chaclacayo.jfif}" alt="chaclacayo"></td>
+                <td th:case="5"><img th:src="@{/lomasdemala.jfif}" alt="lomas"></td>
+
+                <td>
+                    <a th:href="@{'viajes/editar' + '?id=' + ${lugar.getIdLugares()}}" class="btn btn-warning">Editar</a>
+                    <a th:href="@{'viajes/borrar' + '?id=' + ${lugar.getIdLugares()}}" class="btn btn-danger">Borrar</a>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</main>
 
 </body>
 </html>
