@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/bootstrap.min.css}" rel="stylesheet" crossorigin="anonymous">
+    <title>Mascotas</title>
+</head>
+<body>
+<header class="header">
+    <nav class="container">
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link" href="/viajes">Viajes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/mascotas">Mascotas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/lugares">Lugares</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div class="container">
+        <h1 class="pb-2 mb-4 border-bottom">Lista de Mascotas</h1>
+        <div class="d-flex justify-content-end">
+            <a href="/mascotas/nuevo" class="btn btn-dark">Nueva mascota</a>
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>Nombre del Dueño</th>
+                <th>Nombre de Mascota</th>
+                <th>Genero</th>
+                <th>Edad</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Vacunado(Sí/No)</th>
+                <th>Desparasitado(Sí/No)</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="mascota : ${listaMascotas}">
+                <td th:text="${mascota.getPersona().getNombre()}"></td>
+                <td th:text="${mascota.getNombreMascota()}"></td>
+                <td th:text="${mascota.getEdad()}"></td>
+                <td th:text="${mascota.getFechaNacimiento()}"></td>
+                <td th:text="${mascota.getVacunado()}"></td>
+                <td th:text="${mascota.getDesparasitado()()}"></td>
+                <td>
+                    <a th:href="@{'viajes/editar' + '?id=' + ${mascota.getIdMascotas()}}" class="btn btn-warning">Editar</a>
+                    <a th:href="@{'viajes/borrar' + '?id=' + ${mascota.getIdMascotas()}}" class="btn btn-danger">Borrar</a>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</main>
+
+</body>
+</html>

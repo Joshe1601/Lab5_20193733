@@ -38,7 +38,6 @@ public class ViajesController {
     @GetMapping(value = "/viajes/nuevo")
     public String crearViaje(Model model) {
         model.addAttribute("listaPersonas", personaRepository.findAll());
-        model.addAttribute("listaMascotas", mascotasRepository.findAll());
         model.addAttribute("listaLugares", lugaresRepository.findAll());
         return "nuevo-viaje";
     }

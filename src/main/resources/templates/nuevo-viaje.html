@@ -1,10 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Viajes</title>
+    <link th:href="@{/bootstrap.min.css}" rel="stylesheet"/>
 </head>
 <body>
 
+<header class="header">
+    <nav class="container">
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link" href="/viajes">Viajes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/mascotas">Mascotas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/lugares">Lugares</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div class="container px-4 py-5">
+        <h1 class="pb-2 mb-4 border-bottom">Nuevo Viaje</h1>
+        <div class="d-flex justify-content-end">
+            <a href="/mascotas/nuevo" class="btn btn-dark">Nueva mascota</a>
+        </div>
+        <form method="post" action="/viajes/guardar" class="col-8">
+            <div class="mb-3">
+                <label for="puntoRecojo" class="form-label">Punto de Recojo</label>
+                <input name="puntoRecojo" type="text" class="form-control" id="puntoRecojo"/>
+            </div>
+            <div class="mb-3">
+                <label for="cantPersonas" class="form-label">Cantidad de Personas</label>
+                <input name="cantPersonas" type="text" class="form-control" id="cantPersonas"/>
+            </div>
+            <div class="mb-3">
+                <label for="cantPerros" class="form-label">Cantidad de Perros</label>
+                <input name="cantPerros" type="text" class="form-control" id="cantPerros"/>
+            </div>
+            <div class="mb-3">
+                <label for="Persona_idPersona" class="form-label">Selección de lugar</label>
+                <select name="Persona_idPersona" id="Persona_idPersona" class="form-select">
+                    <option selected disabled>Seleccione una persona</option>
+                    <option th:each="persona : ${listaPersonas}"
+                            th:value="${persona.getIdPersona()}"
+                            th:text="${persona.getNombre()}"></option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="Lugares_idLugares" class="form-label">Selección de lugar</label>
+                <select name="Lugares_idLugares" id="Lugares_idLugares" class="form-select">
+                    <option selected disabled>Seleccione una lugar</option>
+                    <option th:each="lugar : ${listaLugares}"
+                            th:value="${lugar.getIdLugares()}"
+                            th:text="${lugar.getNombreLugar()}"></option>
+                </select>
+            </div>
+            <a href="/" class="btn btn-danger">Cancelar</a>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
 </body>
 </html>

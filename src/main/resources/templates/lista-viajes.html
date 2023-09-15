@@ -26,7 +26,6 @@
     <div class="container">
         <h1 class="pb-2 mb-4 border-bottom">Lista de Viajes Programados</h1>
         <a href="/viajes/nuevo" class="btn btn-primary">Nuevo viaje</a>
-        <a href="/mascotas/nuevo" class="btn btn-primary">Nueva mascota</a>
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
@@ -46,6 +45,7 @@
                 <td th:text="${viaje.getPersona().getNombre()}"></td>
                 <td th:text="${viaje.getLugares().getNombreLugar()}"></td>
                 <td>
+                    <a th:href="@{'viajes/detalles' + '?id=' + ${viaje.getIdViajes()}}" class="btn btn-light">Ver más</a>
                     <a th:href="@{'viajes/editar' + '?id=' + ${viaje.getIdViajes()}}" class="btn btn-warning">Editar</a>
                     <a th:href="@{'viajes/borrar' + '?id=' + ${viaje.getIdViajes()}}" class="btn btn-danger">Borrar</a>
                 </td>
